@@ -23,9 +23,9 @@ func main() {
 
 	// routes
 	http.HandleFunc("/",func(w http.ResponseWriter,r *http.Request){
-
+		w.Write([]byte("Hello"))
 	})
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":"+strconv.Itoa(portnum), nil)
 	if err != nil {
 		panic("Error occured in server----->>" + err.Error())
 	}
