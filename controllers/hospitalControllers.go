@@ -8,12 +8,12 @@ import (
 )
 
 type hospital struct {
-	hospitalName string
+	HospitalName string
 }
 
 type date struct {
 	hospital
-	date string
+	Date string
 }
 
 func FindByHospitalController(w http.ResponseWriter, r *http.Request) {
@@ -32,11 +32,11 @@ func FindByHospitalController(w http.ResponseWriter, r *http.Request) {
 
 		var data []database.Hospital
 
-		if err := database.QueryByHospitalName(hos.hospitalName, &data); err != nil {
+		if err := database.QueryByHospitalName(hos.HospitalName, &data); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-
+		
 		jsonData, err := json.Marshal(data)
 
 		if err != nil {
@@ -70,7 +70,7 @@ func FindByDateController(w http.ResponseWriter, r *http.Request) {
 
 		var data []database.Doctor
 
-		if err := database.QueryDoctorByDate(date.hospitalName, date.date, &data); err != nil {
+		if err := database.QueryDoctorByDate(date.HospitalName, date.Date, &data); err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}

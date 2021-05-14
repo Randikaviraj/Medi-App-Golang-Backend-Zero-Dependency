@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -12,7 +11,6 @@ func Setup() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		path := r.RequestURI
 		path=strings.TrimSuffix(path,"/")
-		fmt.Printf(path)
 
 		switch path {
 

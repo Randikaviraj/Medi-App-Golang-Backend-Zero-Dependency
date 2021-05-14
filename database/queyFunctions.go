@@ -1,8 +1,8 @@
 package database
 
 import (
-	"log"
 	"errors"
+	"log"
 )
 
 
@@ -52,8 +52,9 @@ func QueryByHospitalName(hospitalName string,doctors *[] Hospital) error{
 
 
 func QueryByDoctorName(doctorName string,doctors *[] HospitalAndDoctor) error{
+	
 
-	result, err := Db.Query(`SELECT doctor.first_name,doctor.last_name,doctor.specialized_field,hospital.name,hospital.contact,hospital.town,works_at.Working_hours,works_at.Working_days FROM ((works_at INNER JOIN doctor on works_at.MCID=doctor.MCID) INNER JOIN hospital ON works_at.Hos_reg_id=hospital.Hos_reg_id) WHERE doctor.first_name LIKE CONCAT(?,'%') || doctor.last_name LIKE CONCAT(?,'%');`,doctorName)
+	result, err := Db.Query(`SELECT doctor.first_name,doctor.last_name,doctor.specialized_field,hospital.name,hospital.contact,hospital.town,works_at.Working_hours,works_at.Working_days FROM ((works_at INNER JOIN doctor on works_at.MCID=doctor.MCID) INNER JOIN hospital ON works_at.Hos_reg_id=hospital.Hos_reg_id) WHERE doctor.first_name LIKE CONCAT(?,'%') || doctor.last_name LIKE CONCAT(?,'%');`,doctorName,doctorName)
 
 	if err != nil {
 		log.Print(err.Error())
