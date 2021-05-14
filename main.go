@@ -42,7 +42,7 @@ func main() {
 	// safe server close function
 	serverCloseHandler()
 	
-
+	log.Printf("Serevr started")
 	err := http.ListenAndServe(":"+strconv.Itoa(portnum), nil)
 	if err != nil {
 		log.Panicf(err.Error())
@@ -54,8 +54,8 @@ func serverCloseHandler() {
 	signal.Notify(close, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-close
-		log.Printf("<<<<<<<<<<-----------------------Server Closing----------------------->>>>>>>>")
-		fmt.Println("- Good bye!")
+		log.Println("Server Closing")
+		fmt.Println("<<<<<<<<<<-----------------------Good bye! ----------------------->>>>>>>>")
 		os.Exit(0)
 	}()
 
