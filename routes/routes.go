@@ -1,18 +1,37 @@
 package routes
 
 import (
+	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/randika/Medi-App-Golang-Backend/controllers"
 )
 
-func Setup()  {
-	http.HandleFunc("/",func(w http.ResponseWriter,r *http.Request){
-		w.Write([]byte("Server working.."))
-	})
+func Setup() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		path := r.RequestURI
+		path=strings.TrimSuffix(path,"/")
+		fmt.Printf(path)
 
-	http.HandleFunc("/date",controllers.FindByDateController)
-	http.HandleFunc("/doctor",controllers.FindByNameController)
-	http.HandleFunc("/hospital",controllers.FindByHospitalController)
-	http.HandleFunc("/specility",controllers.FindBySpecilityController)
+		switch path {
+
+		case "/date":
+			controllers.FindByDateController(w, r)
+
+		case "/doctor":
+			controllers.FindByNameController(w, r)
+
+		case "/hospital":
+			controllers.FindByHospitalController(w, r)
+
+		case "/specility":
+			controllers.FindBySpecilityController(w, r)
+
+		default:
+			w.Write([]byte("Server working.." + path))
+
+		}
+
+	})
 }
